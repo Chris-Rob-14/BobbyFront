@@ -32,7 +32,7 @@
     <section :class="$style.profilanimalWrapper">
       <div :class="$style.profilanimal">
         <div :class="$style.profilanimalChild" />
-        <Frame1 /><frame />
+        <Frame1 :animal="animal"/>
       </div>
     </section>
   </div>
@@ -42,10 +42,35 @@
   import FrameComponent from "../components/FrameComponent.vue";
   import Frame1 from "../components/Frame1.vue";
   import Frame from "../components/Frame.vue";
+  import axios from 'axios';
+  axios.defaults.withCredentials = true;
 
   export default defineComponent({
+    data() {
+      return {
+        animal: {
+          type: Object
+        },
+      }
+    },
+    async mounted() {
+      await this.getAnimal();
+      console.log(this.animal);
+    },
     name: "ProfilAnimal",
     components: { FrameComponent, Frame1, Frame },
+    methods: {
+      async getAnimal() {
+        const response = await axios.get('http://localhost:3030/animals/1', {
+          withCredentials: true,
+        })
+
+        console.log(response.data);
+
+        this.animal = response.data;
+
+      },
+    }
   });
 </script>
 <style module>
