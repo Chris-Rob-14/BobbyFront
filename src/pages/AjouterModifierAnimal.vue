@@ -23,7 +23,7 @@
         </div>
       </header>
       <section :class="$style.emailInputFrame">
-        <form @submit.prevent="onEnregistrerClick">
+        <form @submit.prevent="createAnimal">
           <div :class="$style.addressText">
             <div :class="$style.addressTextChild" />
             <div :class="$style.passwordInputFrame">
@@ -35,78 +35,48 @@
                     src="/group-121@2x.png"
                   />
                 </div>
-                <div :class="$style.nomText">
-                  <div :class="$style.temoinText">
-                    <h1 :class="$style.chris">Ralph</h1>
-                  </div>
-                  <div :class="$style.passionnDanimaux">Carlin</div>
-                </div>
+                
               </div>
             </div>
             <div :class="$style.emailframe">
               <div :class="$style.contentframe">
+                <p>{{  error }}</p>
                 <label :for="$style.emailInput" :class="$style.adresseEMail"
-                  >Numero d'identification</label
+                  >Nom</label
                 >
                 <input
+                v-model="name"
                   :id="$style.emailInput"
                   :class="$style.frameChild"
                   type="text"
                 />
                 <div :class="$style.passwordtext">
                   <label :for="$style.passwordInput" :class="$style.motDePasse"
-                    >Traitement régulier</label
+                    >Type</label
                   >
                   <input
+                    v-model="type"
                     :id="$style.passwordInput"
                     :class="$style.frameItem"
                     type="text"
                   />
                 </div>
-                <div :class="$style.passwordtext">
-                  <label :for="$style.passwordInput" :class="$style.motDePasse"
-                    >Poids</label
-                  >
-                  <input
-                    :id="$style.passwordInput"
-                    :class="$style.frameItem"
-                    type="number"
-                  />
-                </div>
-                <div :class="$style.passwordtext">
-                  <label :for="$style.passwordInput" :class="$style.motDePasse"
-                    >Taille</label
-                  >
-                  <input
-                    :id="$style.passwordInput"
-                    :class="$style.frameItem"
-                    type="number"
-                  />
-                </div>
                 <label :for="$style.birthdayInput" :class="$style.ageInputLabel"
-                  >Date de naissance</label
+                  >Age</label
                 >
                 <input
+                v-model="age"
                   :id="$style.birthdayInput"
                   :class="$style.rectangleDiv"
-                  type="date"
+                  type="number"
                 />
-                <div :class="$style.checkboxcontainer">
-                  <label for="sterilise" :class="$style.motDePasse"
-                    >Stérilisé ?</label
-                  >
-                  <input
-                    type="checkbox"
-                    id="sterilise"
-                    name="sterilise"/>
-                </div>
               </div>
             </div>
             <div :class="$style.ageFrame">
               <div :class="$style.groupDiv">
                 <div :class="$style.frameChild8" />
-                <div :class="$style.enregistrer" @click="onEnregistrerClick">
-                  Enregistrer
+                <div :class="$style.enregistrer">
+                  <button type="submit">Enregistrer</button>
                 </div>
               </div>
             </div>
@@ -119,20 +89,44 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Nomgroup from "../components/Nomgroup.vue";
+import axios, { AxiosError } from 'axios';
+axios.defaults.withCredentials = true;
 
 export default defineComponent({
   name: "AjouterModifierAnimal",
+  data() {
+    return {
+      error: '',
+      name: '',
+      age: 0,
+      type: '',
+    }
+  },
   components: { Nomgroup },
   methods: {
+    async createAnimal() {
+      try {
+          const response = await axios.post('http://localhost:3030/animals/create', {
+            name: this.name,
+            age: this.age,
+            type: this.type
+          }, {
+            withCredentials: true,
+          })
+
+          if (response.status === 201) {
+            this.$router.push("/listeanimaux");
+          }
+        } catch (error: any) {
+          console.log(error.response.data);
+          this.error = error.response.data.message[0];
+        }
+    },
     onLogoInstanceContainerClick() {
       this.$router.push("/listeanimaux");
     },
     onMenuBurgerContainerClick() {
       this.$router.push("/mb");
-    },
-    onEnregistrerClick() {
-      // Soumettre le formulaire (par exemple, en envoyant les données au serveur)
-      this.$router.push("/listeanimaux");
     },
   },
 });

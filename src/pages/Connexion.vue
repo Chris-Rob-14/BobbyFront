@@ -21,10 +21,6 @@
         <span :class="$style.crerMonCompte"> <a :class="$style.lienCreation" href="./creation">Créer mon compte</a></span>
       </div>
       <SignUpFrame />
-      <div :class="$style.boutonSeConnecter" @click="onBoutonSeConnecterClick">
-        <div :class="$style.boutonSeConnecterChild" />
-        <div :class="$style.jeMeConnecte">Je me connecte</div>
-      </div>
     </main>
   </div>
 </template>
@@ -35,11 +31,7 @@
   export default defineComponent({
     name: "Connexion",
     components: { SignUpFrame },
-    methods: {
-      onBoutonSeConnecterClick() {
-        this.$router.push("/listeanimaux");
-      },
-    },
+
   });
 </script>
 <style module>

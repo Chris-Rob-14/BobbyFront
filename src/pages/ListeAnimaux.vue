@@ -34,7 +34,7 @@
       <h1 :class="$style.h1">+</h1>
       <div :class="$style.jajouteUnAnimal">J’ajoute un animal</div>
     </div>
-    <AnimalCard /><ListAnimalsFrame1 /><ListAnimalsFrame />
+    <AnimalCard v-for="animal in animals" :animal="animal"/>
   </div>
 </template>
 
@@ -43,11 +43,38 @@
   import AnimalCard from "../components/AnimalCard.vue";
   import ListAnimalsFrame1 from "../components/ListAnimalsFrame1.vue";
   import ListAnimalsFrame from "../components/ListAnimalsFrame.vue";
+  import axios from 'axios';
+  axios.defaults.withCredentials = true;
 
   export default defineComponent({
+    data() {
+      return {
+        isLogged: false, 
+        animals: '',
+      }
+    },
     name: "ListeAnimaux",
+    async beforeMount() {
+      this.isUserLoggedIn();
+      await this.getMyAnimals();
+      console.log(this.animals);
+    },
+    mounted() {
+    },
     components: { AnimalCard, ListAnimalsFrame1, ListAnimalsFrame },
     methods: {
+      async getMyAnimals() {
+        const response = await axios.get('http://localhost:3030/users/animals', {
+          withCredentials: true,
+        });
+
+        this.animals = response.data;
+      },
+      isUserLoggedIn() {
+        const sessionCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('connect.sid'));
+        console.log(sessionCookie);
+        this.isLogged = !!sessionCookie; // Set isLogged to true if the cookie is present
+      },
       onMenuBurgerContainerClick() {
         this.$router.push("/mb");
       },

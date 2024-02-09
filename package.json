@@ -13,6 +13,8 @@
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/vue3": "^6.1.10",
+    "axios": "^1.6.7",
+    "cookie-parser": "^1.4.6",
     "csstype": "^3.1.2",
     "fullcalendar": "^6.1.10",
     "vue": "^3.2.47",

@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.ralphDetails" :style="ralphDetailsStyle">
-    <h2 :class="$style.ralph" :style="ralphStyle">Ralph</h2>
+    <h2 :class="$style.ralph" :style="ralphStyle">{{ animal.name }}</h2>
     <div :class="$style.dogImage" :style="dogImageStyle">
-      <div :class="$style.carlin">Carlin</div>
+      <div :class="$style.carlin">{{ animal.type }}</div>
       <img
         :class="$style.phdogFillIcon"
         alt=""
@@ -10,7 +10,7 @@
       />
     </div>
     <div :class="$style.lalaProfile" :style="lalaProfileStyle">
-      <div :class="$style.mai2019">13 mai 2019</div>
+      <div :class="$style.mai2019">{{ animal.age }} ans</div>
       <img
         :class="$style.vectorIcon"
         alt=""
@@ -26,6 +26,7 @@
   export default defineComponent({
     name: "RalphDetails",
     props: {
+      animal: {},
       propMinWidth: { type: [Object, Array, String, Number, Boolean] },
       propWidth: { type: [Object, Array, String, Number, Boolean] },
       propPaddingRight: { type: [Object, Array, String, Number, Boolean] },

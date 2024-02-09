@@ -1,5 +1,5 @@
 <template>
-  <form :class="$style.signUpFrame">
+  <form @submit.prevent="login" :class="$style.signUpFrame">
     <div :class="$style.jeMeConnecteAvecFParent">
       <div :class="$style.jeMeConnecteAvecF">
         <div :class="$style.jeMeConnecte">Je me connecte avec</div>
@@ -23,23 +23,59 @@
     <div :class="$style.frameWithEllipses">
       <div :class="$style.motDePasse">Adresse e-mail</div>
       <div :class="$style.passwordInput">
-        <input v-model="email" :class="$style.rectangleGroup" type="email" placeholder="Robert.roger@gmail.com" required />
+        <input v-model="email" id="email" :class="$style.rectangleGroup" type="email" placeholder="Robert.roger@gmail.com" required />
         </div>
       </div>
     <div :class="$style.frameWithEllipses">
       <div :class="$style.motDePasse">Mot de passe</div>
       <div :class="$style.passwordInput">
-        <input v-model="password" :class="$style.rectangleGroup" type="password" placeholder="Mot de passe" required />
+        <input v-model="password" id="password" :class="$style.rectangleGroup" type="password" placeholder="Mot de passe" required />
         </div>
         <div :class="$style.motDePasse1">Mot de passe oublié ?</div>
+      </div>
+      <div v-if="errorLogin">Erreur dans votre saisie</div>
+      <div :class="$style.boutonSeConnecter">
+        <div :class="$style.boutonSeConnecterChild" />
+        <button type="submit" :class="$style.jeMeConnecte">Je me connecte</button>
       </div>
   </form>
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
+  import axios from 'axios';
+  axios.defaults.withCredentials = true;
 
   export default defineComponent({
+    data() {
+      return {
+        email: '',
+        password: '',
+        errorLogin: false,
+      }
+    },
     name: "SignUpFrame",
+    methods: {
+      async login() {
+        try {
+          const response = await axios.post('http://localhost:3030/auth/login', {
+            email: this.email,
+            password: this.password
+          }, {
+            withCredentials: true,
+          })
+
+          if (response.status === 201) {
+            this.$router.push("/listeanimaux");
+          }
+
+        } catch (error) {
+
+          if (error.code == 'ERR_BAD_REQUEST') this.errorLogin = true;
+        }
+
+          
+      }
+    }
   });
 </script>
 <style module>
