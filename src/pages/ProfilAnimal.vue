@@ -14,7 +14,7 @@
             src="/group1.svg"
           />
         </div>
-        <div :class="$style.menuBurger1" @click="onMenuBurgerContainerClick">
+        <div :class="$style.menuBurger1">
           <img
             :class="$style.menuBurgerChild"
             alt=""
@@ -53,7 +53,7 @@
         },
       }
     },
-    async mounted() {
+    async beforeMount() {
       await this.getAnimal();
       console.log(this.animal);
     },
@@ -61,7 +61,7 @@
     components: { FrameComponent, Frame1, Frame },
     methods: {
       async getAnimal() {
-        const response = await axios.get('http://localhost:3030/animals/1', {
+        const response = await axios.get('http://localhost:3030/animals/' + this.$route.params.id, {
           withCredentials: true,
         })
 
