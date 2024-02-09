@@ -38,7 +38,7 @@
         this.$router.push("/ajoutermodifieranimal");
       },
       onGroupContainerClick() {
-        this.$router.push("/profil-animal");
+        this.$router.push({name: 'ProfilAnimal', params: { id: this.animal.id}});
       },
     },
   });

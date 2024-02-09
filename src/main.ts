@@ -54,7 +54,7 @@ const routes: Route[] = [
     component: Documents,
   },
   {
-    path: "/profil-animal",
+    path: "/profil-animal/:id",
     name: "ProfilAnimal",
     component: ProfilAnimal,
   },

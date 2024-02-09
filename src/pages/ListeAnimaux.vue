@@ -41,8 +41,6 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import AnimalCard from "../components/AnimalCard.vue";
-  import ListAnimalsFrame1 from "../components/ListAnimalsFrame1.vue";
-  import ListAnimalsFrame from "../components/ListAnimalsFrame.vue";
   import axios from 'axios';
   axios.defaults.withCredentials = true;
 
@@ -61,7 +59,7 @@
     },
     mounted() {
     },
-    components: { AnimalCard, ListAnimalsFrame1, ListAnimalsFrame },
+    components: { AnimalCard },
     methods: {
       async getMyAnimals() {
         const response = await axios.get('http://localhost:3030/users/animals', {
