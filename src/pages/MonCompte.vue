@@ -36,7 +36,7 @@
               </div>
               <div :class="$style.nomText">
                 <div :class="$style.temoinText">
-                  <h1 :class="$style.chris">Chris</h1>
+                  <h1 :class="$style.chris">{{ user.firstName + ' ' + user.lastName }}</h1>
                 </div>
                 <div :class="$style.passionnDanimaux">Passionné d’animaux</div>
               </div>
@@ -48,6 +48,7 @@
                 >Adresse e-mail</label
               >
               <input
+                v-model="email"
                 :id="$style.emailInput"
                 :class="$style.frameChild"
                 type="email"
@@ -64,14 +65,6 @@
                 />
                 
               </div>
-              
-                <label :for="$style.birthdayInput" :class="$style.ageInputLabel"
-                  >Date de naissance</label>
-                <input
-                  :id="$style.birthdayInput"
-                  :class="$style.rectangleDiv"
-                  type="date"
-                />
               
             </div>
           </div>
@@ -90,11 +83,33 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Nomgroup from "../components/Nomgroup.vue";
+import axios from "axios";
 
 export default defineComponent({
+  data() {
+    return {
+      user: {
+        type: Object
+      },
+      email: ''
+    }
+  },
+  async beforeMount() {
+    await this.getMe();
+    console.log(this.user);
+    console.log(this.email)
+  },
   name: "MonCompte",
   components: { Nomgroup },
   methods: {
+    async getMe() {
+      const response = await axios.get('http://localhost:3030/auth/status', {
+        withCredentials: true,
+      });
+
+      this.user = response.data;
+      this.email = response.data.email;
+    },
     onLogoInstanceContainerClick() {
       this.$router.push("/listeanimaux");
     },
