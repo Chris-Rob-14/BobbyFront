@@ -2,7 +2,8 @@
   <div :class="$style.profilAnimal">
     <header :class="$style.header">
       <div :class="$style.menuBurger">
-        <div :class="$style.logo">
+        <div :class="$style.logo"
+        @click="onLogoInstanceContainerClick">
           <img
             :class="$style.vectorIcon"
             alt=""
@@ -14,7 +15,7 @@
             src="/group1.svg"
           />
         </div>
-        <div :class="$style.menuBurger1">
+        <div :class="$style.menuBurger1" @click="onMenuBurgerContainerClick">
           <img
             :class="$style.menuBurgerChild"
             alt=""
@@ -70,6 +71,12 @@
         this.animal = response.data;
 
       },
+      onLogoInstanceContainerClick() {
+      this.$router.push("/listeanimaux");
+    },
+    onMenuBurgerContainerClick() {
+      this.$router.push("/mb");
+    },
     }
   });
 </script>

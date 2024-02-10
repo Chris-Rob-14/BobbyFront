@@ -64,7 +64,9 @@
     name: "Frame1",
     methods: {
       onVectorIconClick() {
-        this.$router.push("/ajoutermodifieranimal");
+        this.$router.push({
+          name: "ModifyAnimal"
+        });
       },
     },
   });
