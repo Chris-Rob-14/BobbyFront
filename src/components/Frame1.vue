@@ -48,7 +48,13 @@
           <div v-for="rdv in animal.rdvs">
             {{  rdv.subject + ' le ' + new Date(rdv.date_start).toLocaleDateString('fr')}}
           </div>
-
+          <div>
+            <button
+            @click="prendreRDV"
+            >
+              Prendre RDV
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -63,6 +69,11 @@
     },
     name: "Frame1",
     methods: {
+      prendreRDV() {
+        this.$router.push({
+          name: "TakeRdv"
+        })
+      },
       onVectorIconClick() {
         this.$router.push({
           name: "ModifyAnimal"

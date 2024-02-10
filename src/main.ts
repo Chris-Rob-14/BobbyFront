@@ -15,6 +15,7 @@ import Blog from "./pages/Blog.vue";
 import ArticleBlog from "./pages/ArticleBlog.vue";
 import MonCompte from "./pages/MonCompte.vue";
 import ModifyAnimal from "./pages/ModifyAnimal.vue";
+import Rdv from "./pages/Rdv.vue";
 import "./global.css";
 
 interface Route {
@@ -28,6 +29,11 @@ const routes: Route[] = [
     path: "/",
     name: "Connexion",
     component: Connexion,
+  },
+  {
+    path: '/rdv/animal/:id',
+    name: "TakeRdv",
+    component: Rdv,
   },
   {
     path: "/creation",
