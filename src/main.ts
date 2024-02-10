@@ -14,6 +14,7 @@ import MB from "./pages/MB.vue";
 import Blog from "./pages/Blog.vue";
 import ArticleBlog from "./pages/ArticleBlog.vue";
 import MonCompte from "./pages/MonCompte.vue";
+import ModifyAnimal from "./pages/ModifyAnimal.vue";
 import "./global.css";
 
 interface Route {
@@ -59,9 +60,14 @@ const routes: Route[] = [
     component: ProfilAnimal,
   },
   {
-    path: "/ajoutermodifieranimal",
-    name: "AjouterModifierAnimal",
+    path: "/createAnimal",
+    name: "addAnimal",
     component: AjouterModifierAnimal,
+  },
+  {
+    path: "/updateanimal/:id",
+    name: "ModifyAnimal",
+    component: ModifyAnimal,
   },
   {
     path: "/mb",

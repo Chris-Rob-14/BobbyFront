@@ -35,7 +35,7 @@
     components: { RalphDetails },
     methods: {
       onGroupIconClick() {
-        this.$router.push("/ajoutermodifieranimal");
+        this.$router.push({name: 'ModifyAnimal', params: { id: this.animal.id}});
       },
       onGroupContainerClick() {
         this.$router.push({name: 'ProfilAnimal', params: { id: this.animal.id}});

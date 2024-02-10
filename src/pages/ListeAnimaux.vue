@@ -77,7 +77,9 @@
         this.$router.push("/mb");
       },
       onGroupContainerClick() {
-        this.$router.push("/ajoutermodifieranimal");
+        this.$router.push({
+          name: "addAnimal"
+        });
       },
     },
   });
