@@ -1,31 +1,24 @@
 <template>
-  <form @submit.prevent="login" :class="$style.signUpFrame">
-    <div :class="$style.jeMeConnecteAvecFParent">
-      <div :class="$style.jeMeConnecteAvecF">
-        <div :class="$style.jeMeConnecte">Je me connecte avec</div>
-        <img :class="$style.facebookSvgIcon" alt="" src="/facebook-svg.svg" />
-      </div>
-      <div :class="$style.jeMeConnecteAvecG">
-        <div :class="$style.jeMeConnecte1">Je me connecte avec</div>
-        <img
-          :class="$style.jeMeConnecteAvecGChild"
-          alt=""
-          src="/group-282.svg"
-        />
+  <form @submit.prevent="register" :class="$style.signUpFrame">
+    <p>Inscription</p>
+    <div :class="$style.frameWithEllipses">
+      <div :class="$style.motDePasse">Prénom</div>
+      <div :class="$style.passwordInput">
+        <input v-model="firstName" id="firstName" :class="$style.rectangleGroup" type="text" placeholder="Robert" required />
       </div>
     </div>
-    <div :class="$style.lineFrame">
-      <img :class="$style.phcatBoldIcon" alt="" src="/phcatbold.svg" />
-      <div :class="$style.ou">ou</div>
-      <div :class="$style.textLabel" />
-      <div :class="$style.textLabel1" />
+    <div :class="$style.frameWithEllipses">
+      <div :class="$style.motDePasse">Nom</div>
+      <div :class="$style.passwordInput">
+        <input v-model="lastName" id="lastName" :class="$style.rectangleGroup" type="text" placeholder="Roger" required />
+      </div>
     </div>
     <div :class="$style.frameWithEllipses">
       <div :class="$style.motDePasse">Adresse e-mail</div>
       <div :class="$style.passwordInput">
         <input v-model="email" id="email" :class="$style.rectangleGroup" type="email" placeholder="Robert.roger@gmail.com" required />
-        </div>
       </div>
+    </div>
     <div :class="$style.frameWithEllipses">
       <div :class="$style.motDePasse">Mot de passe</div>
       <div :class="$style.passwordInput">
@@ -50,22 +43,26 @@
       return {
         email: '',
         password: '',
+        lastName: '',
+        firstName: '',
         errorLogin: false,
       }
     },
     name: "SignUpFrame",
     methods: {
-      async login() {
+      async register() {
         try {
-          const response = await axios.post('http://localhost:3030/auth/login', {
+          const response = await axios.post('http://localhost:3030/users/create', {
             email: this.email,
-            password: this.password
+            password: this.password,
+            firstName: this.firstName,
+            lastName: this.lastName
           }, {
             withCredentials: true,
           })
 
           if (response.status === 201) {
-            this.$router.push("/listeanimaux");
+            this.$router.push("/");
           }
 
         } catch (error) {

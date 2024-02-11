@@ -16,25 +16,18 @@
           />
         </div>
       </section>
-      <SignUpFrame />
-      <div :class="$style.rectangleParent" @click="onGroupContainerClick">
-        <div :class="$style.frameChild" />
-        <div :class="$style.jeCrerMon">Je me connecte</div>
-      </div>
+      <Register />
     </main>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import SignUpFrame from "../components/SignUpFrame.vue";
+  import Register from "../components/Register.vue";
 
   export default defineComponent({
     name: "Creation",
-    components: { SignUpFrame },
+    components: { Register },
     methods: {
-      onGroupContainerClick() {
-        this.$router.push("/listeanimaux");
-      },
     },
   });
 </script>

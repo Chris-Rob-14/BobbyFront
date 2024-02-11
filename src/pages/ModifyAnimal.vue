@@ -93,7 +93,7 @@ import axios, { AxiosError } from 'axios';
 axios.defaults.withCredentials = true;
 
 export default defineComponent({
-  name: "AjouterModifierAnimal",
+  name: "ModifyAnimal",
   data() {
     return {
       error: '',
@@ -103,10 +103,13 @@ export default defineComponent({
     }
   },
   components: { Nomgroup },
+  async beforeMount() {
+    await this.getAnimal();
+  },
   methods: {
     async createAnimal() {
       try {
-          const response = await axios.post('http://localhost:3030/animals/create', {
+          const response = await axios.patch('http://localhost:3030/animals/' + this.$route.params.id, {
             name: this.name,
             age: this.age,
             type: this.type
@@ -114,13 +117,28 @@ export default defineComponent({
             withCredentials: true,
           })
 
-          if (response.status === 201) {
+          console.log(response.status)
+
+          if (response.status === 200) {
             this.$router.push("/listeanimaux");
           }
         } catch (error: any) {
           console.log(error.response.data);
           this.error = error.response.data.message[0];
         }
+    },
+    async getAnimal() {
+      const animal = await axios.get('http://localhost:3030/animals/' + this.$route.params.id,{
+        withCredentials: true,
+      })
+
+      console.log(animal.data);
+
+      this.name = animal.data.name;
+      this.age = animal.data.age;
+      this.type = animal.data.type;
+
+      console.log(this.name);
     },
     onLogoInstanceContainerClick() {
       this.$router.push("/listeanimaux");

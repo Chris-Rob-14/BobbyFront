@@ -14,6 +14,8 @@ import MB from "./pages/MB.vue";
 import Blog from "./pages/Blog.vue";
 import ArticleBlog from "./pages/ArticleBlog.vue";
 import MonCompte from "./pages/MonCompte.vue";
+import ModifyAnimal from "./pages/ModifyAnimal.vue";
+import Rdv from "./pages/Rdv.vue";
 import "./global.css";
 
 interface Route {
@@ -27,6 +29,11 @@ const routes: Route[] = [
     path: "/",
     name: "Connexion",
     component: Connexion,
+  },
+  {
+    path: '/rdv/animal/:id',
+    name: "TakeRdv",
+    component: Rdv,
   },
   {
     path: "/creation",
@@ -54,14 +61,19 @@ const routes: Route[] = [
     component: Documents,
   },
   {
-    path: "/profil-animal",
+    path: "/profil-animal/:id",
     name: "ProfilAnimal",
     component: ProfilAnimal,
   },
   {
-    path: "/ajoutermodifieranimal",
-    name: "AjouterModifierAnimal",
+    path: "/createAnimal",
+    name: "addAnimal",
     component: AjouterModifierAnimal,
+  },
+  {
+    path: "/updateanimal/:id",
+    name: "ModifyAnimal",
+    component: ModifyAnimal,
   },
   {
     path: "/mb",

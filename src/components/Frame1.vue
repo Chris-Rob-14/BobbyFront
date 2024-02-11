@@ -21,11 +21,11 @@
           </div>
           <div :class="$style.animalProfile">
             <div :class="$style.ralphLabel">
-              <h1 :class="$style.ralph">Ralph</h1>
-              <h2 :class="$style.carlin">Carlin</h2>
+              <h1 :class="$style.ralph">{{ animal.name}}</h1>
+              <h2 :class="$style.carlin">{{ animal.type }}</h2>
             </div>
             <div :class="$style.vectorLine">
-              <div :class="$style.mai2019">13 mai 2019</div>
+              <div :class="$style.mai2019">{{ animal.age }} ans</div>
               <div :class="$style.dogFill">
                 <img
                   :class="$style.vectorIcon1"
@@ -41,21 +41,22 @@
             </div>
           </div>
         </div>
-        <div :class="$style.identification82nld82avb04hParent">
-          <div :class="$style.identification82nld82avb04hContainer">
-            <span :class="$style.identification">Identification : </span>
-            <span :class="$style.nld82avb04h">82NLD82AVB04H</span>
+        <div :class="$style.frameGroup">
+          <p>Propriétaire: {{  animal.user.firstName + ' ' + animal.user.lastName }} </p>
+          <p>Moyen de contact: {{  animal.user.email }}</p>
+          <p>Les prochaines rendez-vous : </p>
+          <div v-for="rdv in animal.rdvs">
+            {{  rdv.subject + ' le ' + new Date(rdv.date_start).toLocaleDateString('fr')}}
           </div>
-          <div :class="$style.oprationsStrilisContainer">
-            <span :class="$style.oprations">Opérations : </span>
-            <span :class="$style.strilis">stérilisé</span>
+          <div>
+            <button
+            @click="prendreRDV"
+            >
+              Prendre RDV
+            </button>
           </div>
         </div>
       </div>
-    </div>
-    <div :class="$style.traitementsEnCoursContainer">
-      <span :class="$style.traitementsEnCours">Traitements en cours : </span>
-      <span :class="$style.phosphalugelZylkne">Phosphalugel, zylkène</span>
     </div>
   </div>
 </template>
@@ -63,10 +64,20 @@
   import { defineComponent } from "vue";
 
   export default defineComponent({
+    props: {
+      animal: {}
+    },
     name: "Frame1",
     methods: {
+      prendreRDV() {
+        this.$router.push({
+          name: "TakeRdv"
+        })
+      },
       onVectorIconClick() {
-        this.$router.push("/ajoutermodifieranimal");
+        this.$router.push({
+          name: "ModifyAnimal"
+        });
       },
     },
   });

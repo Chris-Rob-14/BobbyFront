@@ -2,7 +2,8 @@
   <div :class="$style.profilAnimal">
     <header :class="$style.header">
       <div :class="$style.menuBurger">
-        <div :class="$style.logo">
+        <div :class="$style.logo"
+        @click="onLogoInstanceContainerClick">
           <img
             :class="$style.vectorIcon"
             alt=""
@@ -32,7 +33,7 @@
     <section :class="$style.profilanimalWrapper">
       <div :class="$style.profilanimal">
         <div :class="$style.profilanimalChild" />
-        <Frame1 /><frame />
+        <Frame1 :animal="animal"/>
       </div>
     </section>
   </div>
@@ -42,10 +43,41 @@
   import FrameComponent from "../components/FrameComponent.vue";
   import Frame1 from "../components/Frame1.vue";
   import Frame from "../components/Frame.vue";
+  import axios from 'axios';
+  axios.defaults.withCredentials = true;
 
   export default defineComponent({
+    data() {
+      return {
+        animal: {
+          type: Object
+        },
+      }
+    },
+    async beforeMount() {
+      await this.getAnimal();
+      console.log(this.animal);
+    },
     name: "ProfilAnimal",
     components: { FrameComponent, Frame1, Frame },
+    methods: {
+      async getAnimal() {
+        const response = await axios.get('http://localhost:3030/animals/' + this.$route.params.id, {
+          withCredentials: true,
+        })
+
+        console.log(response.data);
+
+        this.animal = response.data;
+
+      },
+      onLogoInstanceContainerClick() {
+      this.$router.push("/listeanimaux");
+    },
+    onMenuBurgerContainerClick() {
+      this.$router.push("/mb");
+    },
+    }
   });
 </script>
 <style module>

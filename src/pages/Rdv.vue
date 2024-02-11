@@ -22,115 +22,80 @@
           </div>
         </div>
       </header>
+
       <section :class="$style.emailInputFrame">
-        <form @submit.prevent="createAnimal">
           <div :class="$style.addressText">
-            <div :class="$style.addressTextChild" />
-            <div :class="$style.passwordInputFrame">
-              <div :class="$style.groupFrameParent">
-                <div :class="$style.groupFrame">
-                  <img
-                    :class="$style.groupFrameChild"
-                    alt=""
-                    src="/group-121@2x.png"
-                  />
-                </div>
-                
-              </div>
+            <p>Prise de rendez-vous pour : {{  animal.name }}</p>
+
+            <div v-if="!researchDone">
+                <form @submit.prevent="veterinariesByCity">
+                    <label for="city">Ville souhaitée:</label>
+                    <input v-model="city" type="text" id="city">
+                    <button type="submit">Rechercher</button>
+                </form>
             </div>
-            <div :class="$style.emailframe">
-              <div :class="$style.contentframe">
-                <p>{{  error }}</p>
-                <label :for="$style.emailInput" :class="$style.adresseEMail"
-                  >Nom</label
-                >
-                <input
-                v-model="name"
-                  :id="$style.emailInput"
-                  :class="$style.frameChild"
-                  type="text"
-                />
-                <div :class="$style.passwordtext">
-                  <label :for="$style.passwordInput" :class="$style.motDePasse"
-                    >Type</label
-                  >
-                  <input
-                    v-model="type"
-                    :id="$style.passwordInput"
-                    :class="$style.frameItem"
-                    type="text"
-                  />
-                </div>
-                <label :for="$style.birthdayInput" :class="$style.ageInputLabel"
-                  >Age</label
-                >
-                <input
-                v-model="age"
-                  :id="$style.birthdayInput"
-                  :class="$style.rectangleDiv"
-                  type="number"
-                />
-              </div>
-            </div>
-            <div :class="$style.ageFrame">
-              <div :class="$style.groupDiv">
-                <div :class="$style.frameChild8" />
-                <div :class="$style.enregistrer">
-                  <button type="submit">Enregistrer</button>
-                </div>
-              </div>
+
+            <div v-if="researchDone">
+                <p>Vétérinaires pour la ville : {{ ciy }}</p>
+                <VetoRdvs v-for="veto in veterinaries" :veto="veto"/>
             </div>
           </div>
-        </form>
       </section>
+
     </main>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
-import Nomgroup from "../components/Nomgroup.vue";
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import VetoRdvs from "../components/vetoRdvs.vue";
+
 axios.defaults.withCredentials = true;
 
-export default defineComponent({
-  name: "AjouterModifierAnimal",
-  data() {
-    return {
-      error: '',
-      name: '',
-      age: 0,
-      type: '',
-    }
-  },
-  components: { Nomgroup },
-  methods: {
-    async createAnimal() {
-      try {
-          const response = await axios.post('http://localhost:3030/animals/create', {
-            name: this.name,
-            age: this.age,
-            type: this.type
-          }, {
-            withCredentials: true,
-          })
-
-          if (response.status === 201) {
+    export default defineComponent({
+    data() {
+        return {
+            animal: {
+                type: Object
+            },
+            city: '',
+            researchDone: false,
+            veterinaries: {
+                type: Object
+            }
+        };
+    },
+    async beforeMount() {
+        await this.getAnimalInformations();
+    },
+    name: "TakeRdv",
+    methods: {
+        async veterinariesByCity() {
+            const response = await axios.get('http://localhost:3030/veterinaries/city/' + this.city, {
+                withCredentials: true,
+            });
+            this.veterinaries = response.data;
+            this.researchDone = true;
+            console.log(this.veterinaries);
+        },
+        async getAnimalInformations() {
+            const response = await axios.get('http://localhost:3030/animals/' + this.$route.params.id, {
+                withCredentials: true,
+            });
+            this.animal = response.data;
+        },
+        onLogoInstanceContainerClick() {
             this.$router.push("/listeanimaux");
-          }
-        } catch (error: any) {
-          console.log(error.response.data);
-          this.error = error.response.data.message[0];
-        }
+        },
+        onMenuBurgerContainerClick() {
+            this.$router.push("/mb");
+        },
     },
-    onLogoInstanceContainerClick() {
-      this.$router.push("/listeanimaux");
-    },
-    onMenuBurgerContainerClick() {
-      this.$router.push("/mb");
-    },
-  },
+    components: { VetoRdvs }
 });
 </script>
+
 <style module>
 .checkboxcontainer {
   display: flex;

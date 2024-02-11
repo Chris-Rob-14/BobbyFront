@@ -6,7 +6,7 @@
           :class="$style.dateFrameChild"
           alt=""
           src="/group-154@2x.png"
-        /><RalphDetails />
+        /><RalphDetails :animal="animal" />
         <img
           :class="$style.dateFrameItem"
           alt=""
@@ -16,7 +16,7 @@
       </div>
       <div :class="$style.rectangleParent" @click="onGroupContainerClick">
         <div :class="$style.frameChild" />
-        <div :class="$style.jeConsulteLe">Je consulte le profil de Ralph</div>
+        <div :class="$style.jeConsulteLe">Je consulte le profil de {{ animal.name }}</div>
       </div>
     </div>
   </section>
@@ -26,14 +26,19 @@
   import RalphDetails from "./RalphDetails.vue";
 
   export default defineComponent({
+    props: {
+      animal: {
+        type: Object
+      },
+    },
     name: "AnimalCard",
     components: { RalphDetails },
     methods: {
       onGroupIconClick() {
-        this.$router.push("/ajoutermodifieranimal");
+        this.$router.push({name: 'ModifyAnimal', params: { id: this.animal.id}});
       },
       onGroupContainerClick() {
-        this.$router.push("/profil-animal");
+        this.$router.push({name: 'ProfilAnimal', params: { id: this.animal.id}});
       },
     },
   });
