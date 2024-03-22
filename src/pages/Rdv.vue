@@ -1,11 +1,7 @@
 <template>
   <div :class="$style.monCompte">
-    <main :class="$style.moncompte">
+    <!--<main :class="$style.moncompte">
       <div :class="$style.moncompteChild" />
-      <header :class="$style.fRAME">
-
-      </header>
-
       <section :class="$style.emailInputFrame">
           <div :class="$style.addressText">
             <p>Prise de rendez-vous pour : {{  animal.name }}</p>
@@ -23,25 +19,29 @@
             </div>
           </div>
         </section>
-        
-      </main>
+      </main>-->
     </div>
     <div class="flex flex-col items-center mx-auto w-full bg-white max-w-[480px] rounded-[30px]">
       <main>
-        <section class="flex flex-col justify-center mt-5 w-full text-xs tracking-wide max-w-[348px] text-zinc-400">
-          <div class="flex gap-5 justify-between items-start px-4 py-3 rounded-2xl border-2 border-solid border-blue-950">
-            <!--<div class="flex-auto my-auto">Ville, localisation, code postal,...</div>-->
-            <input v-model="city" type="text" :class="$style.city"  placeholder="Ville, localisation, code postal" required/>
-          <img loading="lazy" src="@\assets\icons\icons8-chercher-25.png" type="submit"/>
+        <div v-if="!researchDone">
+          <form @submit.prevent="veterinariesByCity" class="flex flex-col justify-center mt-5 w-full text-xs tracking-wide max-w-[348px] text-zinc-400">
+            <div class="flex gap-5 justify-between items-start px-4 py-3 rounded-2xl border-2 border-solid border-blue-950">
+              <!--<div class="flex-auto my-auto">Ville, localisation, code postal,...</div>-->
+              <input v-model="city" type="text" :class="$style.city"  placeholder="Ville, localisation, code postal" required/>
+              <button type="submit">
+                <img loading="lazy" src="@\assets\icons\icons8-chercher-25.png" />
+              </button>
+            </div>
+          </form>
         </div>
-      </section>
-      <section class="flex flex-col px-4 py-4 mt-5 w-full text-xs tracking-wide bg-orange-50 rounded-2xl max-w-[353px]">
-        <div class="flex gap-5 justify-between text-base tracking-wider">
-          <div class="flex gap-3">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/896383355b72da0b66ed03da2e45acae0e8f60a96b756d2cc4d14b2ef2b98e19?apiKey=a051d6c5d07543a3a619fe472f9e9550&" alt="Doctor profile" class="shrink-0 aspect-square w-[61px]" />
-            <div class="flex flex-col self-start">
-              <h2 class="text-blue-950">Dr Bahareh<br />Shacoori-Boittin</h2>
-              <p class="mt-3.5 font-medium text-orange-600">Kinesitherapeute</p>
+        <div v-if="researchDone">
+          <section class="flex flex-col px-4 py-4 mt-5 w-full text-xs tracking-wide bg-orange-50 rounded-2xl max-w-[353px]">
+            <div class="flex gap-5 justify-between text-base tracking-wider">
+              <div class="flex gap-3">
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/896383355b72da0b66ed03da2e45acae0e8f60a96b756d2cc4d14b2ef2b98e19?apiKey=a051d6c5d07543a3a619fe472f9e9550&" alt="Doctor profile" class="shrink-0 aspect-square w-[61px]" />
+                <div class="flex flex-col self-start">
+                  <h2 class="text-blue-950">Dr Bahareh<br />Shacoori-Boittin</h2>
+                  <p class="mt-3.5 font-medium text-orange-600">Kinesitherapeute</p>
             </div>
           </div>
           <div class="flex gap-1 self-start px-2 py-1.5 whitespace-nowrap bg-sky-100 rounded-xl text-blue-950">
@@ -78,6 +78,7 @@
           <button class="justify-center px-3 py-2 rounded-xl border border-blue-800 border-solid">18h30</button>
         </div>
       </section>
+    </div>
     </main>
   </div>
 </template>
