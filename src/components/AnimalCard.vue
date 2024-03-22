@@ -7,12 +7,6 @@
           alt=""
           src="/group-154@2x.png"
         /><RalphDetails :animal="animal" />
-        <img
-          :class="$style.dateFrameItem"
-          alt=""
-          src="/group-152.svg"
-          @click="onGroupIconClick"
-        />
       </div>
       <div :class="$style.rectangleParent" @click="onGroupContainerClick">
         <div :class="$style.frameChild" />
@@ -34,9 +28,6 @@
     name: "AnimalCard",
     components: { RalphDetails },
     methods: {
-      onGroupIconClick() {
-        this.$router.push({name: 'ModifyAnimal', params: { id: this.animal.id}});
-      },
       onGroupContainerClick() {
         this.$router.push({name: 'ProfilAnimal', params: { id: this.animal.id}});
       },
@@ -49,12 +40,6 @@
     width: 101px;
     position: relative;
     object-fit: cover;
-  }
-  .dateFrameItem {
-    height: 33px;
-    width: 33px;
-    position: relative;
-    cursor: pointer;
   }
   .dateFrame {
     align-self: stretch;
@@ -83,8 +68,8 @@
   }
   .rectangleParent {
     border-radius: var(--br-mini);
-    background-color: var(--bleu-middle);
-    border: 3px solid var(--bleu-middle);
+    background-color: #FF6100;
+    border: 3px solid #FF6100;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -98,13 +83,15 @@
   .carteanimalchien {
     flex: 1;
     border-radius: var(--br-mini);
-    background-color: var(--ivoire);
+    background-color: #1746A2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding: var(--padding-smi);
     gap: var(--gap-4xl);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   .animalCard {
     align-self: stretch;

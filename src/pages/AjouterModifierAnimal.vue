@@ -73,12 +73,12 @@
               </div>
             </div>
             <div :class="$style.ageFrame">
-              <div :class="$style.groupDiv">
-                <div :class="$style.frameChild8" />
+           
+                
                 <div :class="$style.enregistrer">
-                  <button type="submit">Enregistrer</button>
+                  <button type="submit" :class="$style.groupDiv">Enregistrer</button>
                 </div>
-              </div>
+              
             </div>
           </div>
         </form>
@@ -246,7 +246,6 @@ export default defineComponent({
   position: absolute;
   top: 0px;
   left: 0px;
-  border-radius: var(--br-11xl) var(--br-11xl) 0px 0px;
   background-color: var(--bleu-clair);
   width: 100%;
   display: flex;
@@ -355,6 +354,7 @@ export default defineComponent({
   color: var(--ivoire);
   font-weight: 600;
   text-align: center;
+  font-family: var(--font-montserrat);
 }
 .robertrogergmailcom {
   position: relative;
@@ -410,6 +410,8 @@ export default defineComponent({
   outline: none;
   text-align: center;
   color: var(--ivoire);
+  font-family: var(--font-montserrat);
+  font-weight: 600;
 }
 .frameInner {
   height: 12px;
@@ -607,6 +609,11 @@ export default defineComponent({
     var(--padding-52xl);
   white-space: nowrap;
   z-index: 1;
+  border: none;
+    width: 150px;
+    color: white;
+    font-weight: 600;
+    font-family: var(--font-montserrat);
 }
 .ageFrame {
   align-self: stretch;
@@ -658,7 +665,6 @@ export default defineComponent({
 .moncompte {
   height: 100vh;
   flex: 1;
-  border-radius: var(--br-11xl);
   background-color: var(--bleu-nuit);
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.articleBlog">
-    <HeaderFrame /><Text2 />
+    <Text2/>
     <section :class="$style.lorsqueLeChatContainer">
       <p :class="$style.lorsqueLeChat">
         Lorsque le chat a accès à un jardin, il utilise ses griffes pour grimper
@@ -75,7 +75,6 @@
   .articleBlog {
     width: 100%;
     position: relative;
-    border-radius: var(--br-11xl);
     background-color: var(--color-white);
     display: flex;
     flex-direction: column;

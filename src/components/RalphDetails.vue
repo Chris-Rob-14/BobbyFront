@@ -6,7 +6,7 @@
       <img
         :class="$style.phdogFillIcon"
         alt=""
-        src="/phdogfill.svg"
+        src="@\assets\AnimalIcon\icons8-chien-25.png"
       />
     </div>
     <div :class="$style.lalaProfile" :style="lalaProfileStyle">
@@ -14,7 +14,7 @@
       <img
         :class="$style.vectorIcon"
         alt=""
-        src="/vector-11.svg"
+        src="@\assets\AnimalIcon\icons8-anniversaire-25.png"
       />
     </div>
   </div>
@@ -115,7 +115,7 @@
     min-width: 92px;
     text-align: left;
     font-size: var(--font-size-13xl);
-    color: var(--bleu-middle);
+    color: #E3EFFF;
     font-family: var(--font-montserrat);
   }
 </style>

@@ -50,7 +50,16 @@
           </div>
           <div>
             <button
+            @click="documents"
+            :class="$style.buttonPrendreRDV"
+            >
+              Consulter l'historique des documents
+            </button>
+          </div>
+          <div>
+            <button
             @click="prendreRDV"
+            :class="$style.buttonPrendreRDV"
             >
               Prendre RDV
             </button>
@@ -74,6 +83,11 @@
           name: "TakeRdv"
         })
       },
+      documents() {
+        this.$router.push({
+          name: "Documents"
+        })
+      },
       onVectorIconClick() {
         this.$router.push({
           name: "ModifyAnimal"
@@ -83,6 +97,18 @@
   });
 </script>
 <style module>
+
+.buttonPrendreRDV{
+  width: 330px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    font-family: 'Montserrat';
+    background-color: #1746A2;
+    color: white;
+    font-weight: 600;
+    margin-top: 30px;
+}
   .groupChild {
     position: absolute;
     top: 20px;
@@ -128,7 +154,7 @@
     margin: 0;
     height: 41px;
     position: relative;
-    font-size: inherit;
+    font-size: xx-large;
     font-weight: 600;
     font-family: inherit;
     display: inline-block;
@@ -167,7 +193,7 @@
   .phdogFillIcon {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 33px;
     width: 17px;
     height: 17px;
     overflow: hidden;
@@ -239,6 +265,8 @@
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--gap-5xs);
+    font-size: 1rem;
+    font-weight: 600;
   }
   .groupParent {
     align-self: stretch;

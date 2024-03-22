@@ -1,34 +1,5 @@
 <template>
   <div :class="$style.mb">
-    <header :class="$style.header">
-      <div :class="$style.menuBurger">
-        <div :class="$style.logo">
-          <img
-            :class="$style.vectorIcon"
-            alt=""
-            src="/vector1.svg"
-          />
-          <img
-            :class="$style.groupIcon"
-            alt=""
-            src="/group1.svg"
-          />
-        </div>
-        <div :class="$style.menuBurger1" @click="onMenuBurgerContainerClick">
-          <img
-            :class="$style.menuBurgerChild"
-            alt=""
-            src="/line-1.svg"
-          />
-          <img
-            :class="$style.menuBurgerItem"
-            alt=""
-            src="/line-1.svg"
-          />
-          <div :class="$style.menuBurgerInner" />
-        </div>
-      </div>
-    </header>
     <main :class="$style.mbInner">
       <section :class="$style.vectorParent">
         <div :class="$style.vector">
@@ -53,7 +24,7 @@
                   alt=""
                   src="/vector-15.svg"
                 />
-                <div :class="$style.monCalendrier">Mon calendrier</div>
+                <div :class="$style.monCalendrier" @click="onMesAnimauxTextClick">Mon calendrier</div>
               </div>
             </div>
             <div :class="$style.vector2" />
@@ -486,6 +457,7 @@
     font-family: var(--font-montserrat);
   }
   .mbInner {
+    margin-top: 5rem;
     width: 358px;
     display: flex;
     flex-direction: row;
@@ -497,7 +469,6 @@
   .mb {
     width: 100%;
     position: relative;
-    border-radius: var(--br-11xl);
     background-color: var(--color-white);
     overflow: hidden;
     display: flex;

@@ -149,7 +149,6 @@
   }
   .header {
     align-self: stretch;
-    border-radius: var(--br-11xl) var(--br-11xl) 0px 0px;
     background-color: var(--bleu-clair);
     display: flex;
     flex-direction: row;

@@ -1,6 +1,5 @@
 <template>
   <form @submit.prevent="register" :class="$style.signUpFrame">
-    <p>Inscription</p>
     <div :class="$style.frameWithEllipses">
       <div :class="$style.motDePasse">Prénom</div>
       <div :class="$style.passwordInput">
@@ -29,10 +28,11 @@
       <div v-if="errorLogin">Erreur dans votre saisie</div>
       <div :class="$style.boutonSeConnecter">
         <div :class="$style.boutonSeConnecterChild" />
-        <button type="submit" :class="$style.jeMeConnecte">Je me connecte</button>
+        <button type="submit" :class="$style.jeCreerCompte">Je créer mon compte</button>
       </div>
   </form>
 </template>
+
 <script lang="ts">
   import { defineComponent } from "vue";
   import axios from 'axios';
@@ -76,13 +76,19 @@
   });
 </script>
 <style module>
-  .jeMeConnecte {
+  .jeCreerCompte{
+  width: 250px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    background-color: #FF6100;
+    text-align: center;
+    margin-top: 30px;
     position: relative;
     font-size: var(--font-size-mini);
     font-weight: 600;
     font-family: var(--font-montserrat);
     color: var(--ivoire);
-    text-align: left;
   }
   .facebookSvgIcon {
     height: 24px;
@@ -265,7 +271,10 @@
     padding: var(--padding-sm) var(--padding-lg) var(--padding-mini);
     gap: var(--gap-xl);
     z-index: 2;
+    outline: none;
+    font-weight: 600;
     border: none;
+    font-family: var(--font-montserrat);
   }
   .motDePasse1 {
     position: relative;

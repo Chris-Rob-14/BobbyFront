@@ -161,7 +161,6 @@
   .traitement {
     width: 100%;
     position: relative;
-    border-radius: var(--br-11xl);
     background-color: var(--color-white);
     overflow: hidden;
     display: flex;

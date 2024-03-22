@@ -1,34 +1,5 @@
 <template>
   <div :class="$style.blog">
-    <header :class="$style.header">
-      <div :class="$style.menuBurger">
-        <div :class="$style.logo">
-          <img
-            :class="$style.vectorIcon"
-            alt=""
-            src="/vector1.svg"
-          />
-          <img
-            :class="$style.groupIcon"
-            alt=""
-            src="/group1.svg"
-          />
-        </div>
-        <div :class="$style.menuBurger1" @click="onMenuBurgerContainerClick">
-          <img
-            :class="$style.menuBurgerChild"
-            alt=""
-            src="/line-1.svg"
-          />
-          <img
-            :class="$style.menuBurgerItem"
-            alt=""
-            src="/line-1.svg"
-          />
-          <div :class="$style.menuBurgerInner" />
-        </div>
-      </div>
-    </header>
     <div :class="$style.rectangleParent">
       <div :class="$style.frameChild" />
       <div :class="$style.queRecherchezVous">Que recherchez-vous ?</div>
@@ -134,7 +105,6 @@
   }
   .header {
     align-self: stretch;
-    border-radius: var(--br-11xl) var(--br-11xl) 0px 0px;
     background-color: var(--bleu-clair);
     display: flex;
     flex-direction: row;
@@ -222,9 +192,9 @@
     font-family: var(--font-montserrat);
   }
   .blog {
+    margin-top: 1rem;
     width: 100%;
     position: relative;
-    border-radius: var(--br-11xl);
     background-color: var(--color-white);
     overflow: hidden;
     display: flex;

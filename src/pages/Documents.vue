@@ -88,6 +88,7 @@
     padding: 0px var(--padding-lg) 0px var(--padding-3xs);
   }
   .frameParentParent {
+    margin-top: 1rem;
     width: 351px;
     height: 810px;
     display: flex;
@@ -105,7 +106,6 @@
   .documents {
     width: 100%;
     position: relative;
-    border-radius: var(--br-11xl);
     background-color: var(--color-white);
     overflow: hidden;
     display: flex;

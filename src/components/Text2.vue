@@ -73,6 +73,7 @@
     z-index: 2;
   }
   .text2 {
+    margin-top: 10rem;
     align-self: stretch;
     display: flex;
     flex-direction: row;

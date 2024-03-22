@@ -59,7 +59,7 @@
         this.$router.push("/mb");
       },
       onRendezVousTextClick() {
-        this.$router.push("/priserdv");
+        this.$router.push("/TakeRdv");
       },
       onDocumentsTextClick() {
         this.$router.push("/documents");
@@ -143,7 +143,6 @@
   }
   .header {
     align-self: stretch;
-    border-radius: var(--br-11xl) var(--br-11xl) 0px 0px;
     background-color: var(--bleu-clair);
     display: flex;
     flex-direction: row;
